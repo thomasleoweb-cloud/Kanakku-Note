@@ -2,6 +2,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
 import Content from "../components/Content";
+import { Outlet } from "react-router";
+import ChartComponent from "../components/ChartComponent";
 
 const Home = () => {
   return (
@@ -14,6 +16,8 @@ const Home = () => {
       </div>
       <div className="col-span-5 row-span-9">
         <Content  />
+        {/* <ChartComponent  /> */}
+        <Outlet />
       </div>
       <div className="col-span-6 row-span-1">
         <Footer  />

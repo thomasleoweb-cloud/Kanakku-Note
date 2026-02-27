@@ -4,15 +4,18 @@ const Menu = () => {
     const MenuArray1 = [
         {
             id: '1',
-            title: 'Dasboard'
+            title: 'Expenses',
+            path: ''
         },
         {
             id: '2',
-            title: 'Chart'
+            title: 'Chart',
+            path: '/chart'
         },
         {
             id: '3',
-            title: 'Category'
+            title: 'Filter',
+            path: '/filter'
         },
     ]
   return (
@@ -25,7 +28,7 @@ const Menu = () => {
                       <li
                         key={item.id} className="menuList text-white text-xl"
                       >
-                        <Link to={''}>
+                        <Link to={item?.path}>
                             {item.title}
                         </Link>
                       </li>
