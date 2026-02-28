@@ -1,5 +1,7 @@
 import HomeWrapper from "./wrappers/HomeWrapper";
-import ChartComponent from "./components/ChartComponent";
+import ChartComponent from "./pages/ChartComponent"
+import Content from "./pages/Content";
+import Filters from "./pages/Filters";
 import { createBrowserRouter, RouterProvider } from "react-router";
 
 const App = () => {
@@ -9,8 +11,16 @@ const App = () => {
       element: <HomeWrapper />,
       children: [
         {
-          path: "/chart",
+          path: "",
+          element: <Content />,
+        },
+        {
+          path: "chart",
           element: <ChartComponent />,
+        },
+        {
+          path: "filters",
+          element: <Filters />,
         },
       ],
     },

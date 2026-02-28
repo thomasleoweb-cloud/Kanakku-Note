@@ -1,4 +1,3 @@
-import Dropdown from "./Dropdown";
 import { useState, useEffect } from "react";
 
 const Content = () => {
@@ -164,13 +163,13 @@ const Content = () => {
         <table className="ListTable border-collapse border border-gray-500 w-5xl">
           <thead className="sticky top-0 border">
             <tr>
-              <th className="w-15 border">Sl.No</th>
-              <th className="w-35 border">Date</th>
-              <th className="w-45 border">Category</th>
-              <th className="w-62.5 border">Note</th>
-              <th className="w-30 border">Amount</th>
-              <th className="w-45 border">Update</th>
-              <th className="w-30 border">Remove</th>
+              <th className="w-15 border bg-blue-400">Sl.No</th>
+              <th className="w-35 border bg-blue-400">Date</th>
+              <th className="w-45 border bg-blue-400">Category</th>
+              <th className="w-62.5 border bg-blue-400">Note</th>
+              <th className="w-30 border bg-blue-400">Amount</th>
+              <th className="w-45 border bg-blue-400">Update</th>
+              <th className="w-30 border bg-blue-400">Remove</th>
             </tr>
           </thead>
 
@@ -232,7 +231,7 @@ const Content = () => {
                         <button className="cursor-pointer border bg-red-900 text-white px-2" onClick={handleCancelEdit}>X</button>
                       </div>
                     ) : (
-                      <button className="cursor-pointer" onClick={() => handleEdit(item)}>Edit</button>
+                      <button className="cursor-pointer border px-2 bg-blue-800 text-white" onClick={() => handleEdit(item)}>Edit</button>
                     )}
                   </td>
                   <td className="border">
@@ -247,13 +246,14 @@ const Content = () => {
               );
             })}
             <tr className="font-bold text-center">
-              <td colSpan="5"></td>
+              <td colSpan="3"></td>
               <td className="border">Total:</td>
-              <td>{total}</td>
+              <td className="border">{total}</td>
             </tr>
           </tbody>
-        </table>
+        </table>        
       </div>
+      <h2 className="font-bold"><span className="text-red-700">*</span>&nbsp;Total amount spent this month: <span className="text-red-600">{total}</span></h2>
     </div>
   );
 };

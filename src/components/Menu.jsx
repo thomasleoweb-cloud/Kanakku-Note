@@ -15,7 +15,7 @@ const Menu = () => {
         {
             id: '3',
             title: 'Filter',
-            path: '/filter'
+            path: '/filters'
         },
     ]
   return (
