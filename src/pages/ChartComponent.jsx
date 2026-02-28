@@ -29,7 +29,7 @@ const ChartComponent = () => {
 
     const ctx = chartRef.current.getContext('2d');
     chartInstance.current = new Chart(ctx, {
-      type: 'doughnut',
+      type: 'pie',
       data: {
         labels: categories,
         datasets: [{
@@ -56,13 +56,16 @@ const ChartComponent = () => {
   }, [allData]);
 
   return (
-    <div style={{ width: '400px', margin: 'auto' }}>
-      {allData.length > 0 ? (
-        <canvas ref={chartRef}></canvas>
-      ) : (
-        <p style={{ textAlign: 'center' }}>No data available to chart.</p>
-      )}
-    </div>
+    <>
+      <h1 className="font-bold text-2xl text-center mt-5">Pie-Chart</h1>
+        <div style={{ width: '400px', margin: 'auto' }}>
+          {allData.length > 0 ? (
+            <canvas ref={chartRef}></canvas>
+          ) : (
+            <p style={{ textAlign: 'center' }}>No data available to chart.</p>
+          )}
+      </div>
+    </>
   )
 }
 

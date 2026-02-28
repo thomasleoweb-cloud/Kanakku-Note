@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 
 const Content = () => {
+  const [categoryList, setCategoryList] = useState([
+    "Bills",
+    "Travel",
+    "Food",
+    "Entertainment",
+    "Grocery",
+    "Shopping",
+    "Others",
+  ]);
   const [form1, setForm1] = useState({
     amount: 0,
     category: "",
@@ -21,7 +30,7 @@ const Content = () => {
     try {
       const data = JSON.parse(localStorage.getItem("expenses") || "[]");
       setAllData(data);
-      console.log('is it setting')
+      // console.log("is it setting");
     } catch {
       // localStorage.removeItem('expenses');
       console.error("Storage error:");
@@ -29,7 +38,7 @@ const Content = () => {
   }, []);
 
   useEffect(() => {
-    console.log("allData", allData)
+    // console.log("allData", allData);
     localStorage.setItem("expenses", JSON.stringify(allData));
   }, [allData]);
 
@@ -62,10 +71,8 @@ const Content = () => {
   };
 
   const handleSaveEdit = () => {
-   setAllData(prev =>
-      prev.map(item =>
-        item.id === editId ? editChange : item
-      )
+    setAllData((prev) =>
+      prev.map((item) => (item.id === editId ? editChange : item)),
     );
 
     setEditId(null);
@@ -110,12 +117,14 @@ const Content = () => {
 
   return (
     <div className="ContentSection p-5 flex flex-col gap-5">
+      <h1 className="font-bold text-2xl">Track Your Expences</h1>
       <form
         onSubmit={handleSave}
         className="form grid grid-cols-18 grid-rows-1 gap-2"
       >
         <span className="text-sm col-span-2">Amount:</span>
         <input
+          required
           type="number"
           name="amount"
           id="Amount"
@@ -125,7 +134,24 @@ const Content = () => {
           className="amountIn border text-sm h-6 col-span-2"
         />
         <span className="text-sm col-span-2">Category:</span>{" "}
-        <input
+        <select
+          required
+          name="category"
+          id="Category"
+          value={form1.category}
+          onChange={handleChange}
+          placeholder="Enter Category"
+          className="categoryIn border text-sm h-6 col-span-2"
+        >
+          {categoryList?.map((item, i) => {
+            return (
+              <>
+                <option value={item}>{item}</option>
+              </>
+            );
+          })}
+        </select>
+        {/* <input
           type="text"
           name="category"
           id="Category"
@@ -133,9 +159,10 @@ const Content = () => {
           onChange={handleChange}
           placeholder="Enter Category"
           className="categoryIn border text-sm h-6 col-span-2"
-        />
+        /> */}
         <span className="text-sm col-span-1">Date:</span>{" "}
         <input
+          required
           type="date"
           name="date"
           id="Date"
@@ -145,6 +172,7 @@ const Content = () => {
         />
         <span className="text-sm col-span-1">Note:</span>{" "}
         <textarea
+          required
           name="note"
           id="Note"
           cols="50"
@@ -192,12 +220,27 @@ const Content = () => {
                   </td>
                   <td className="border">
                     {editId === item?.id ? (
-                      <input
+                      <select
                         name="category"
+                        id="Category"
                         value={editChange?.category}
                         onChange={handleEditChange}
-                      />
+                        className="border"
+                      >
+                        {categoryList?.map((item, i) => {
+                          return (
+                            <>
+                              <option value={item}>{item}</option>
+                            </>
+                          );
+                        })}
+                      </select>
                     ) : (
+                      // <input
+                      //   name="category"
+                      //   value={editChange?.category}
+                      //   onChange={handleEditChange}
+                      // />
                       item?.category
                     )}
                   </td>
@@ -227,11 +270,26 @@ const Content = () => {
                   <td className="border">
                     {editId === item?.id ? (
                       <div className="flex justify-around">
-                        <button className="cursor-pointer border bg-blue-900 text-white px-2" onClick={handleSaveEdit}>Save</button>
-                        <button className="cursor-pointer border bg-red-900 text-white px-2" onClick={handleCancelEdit}>X</button>
+                        <button
+                          className="cursor-pointer border bg-blue-900 text-white px-2"
+                          onClick={handleSaveEdit}
+                        >
+                          Save
+                        </button>
+                        <button
+                          className="cursor-pointer border bg-red-900 text-white px-2"
+                          onClick={handleCancelEdit}
+                        >
+                          X
+                        </button>
                       </div>
                     ) : (
-                      <button className="cursor-pointer border px-2 bg-blue-800 text-white" onClick={() => handleEdit(item)}>Edit</button>
+                      <button
+                        className="cursor-pointer border px-2 bg-blue-800 text-white"
+                        onClick={() => handleEdit(item)}
+                      >
+                        Edit
+                      </button>
                     )}
                   </td>
                   <td className="border">
@@ -247,13 +305,16 @@ const Content = () => {
             })}
             <tr className="font-bold text-center">
               <td colSpan="3"></td>
-              <td className="border">Total:</td>
+              <td className="border">Total:&#8377;</td>
               <td className="border">{total}</td>
             </tr>
           </tbody>
-        </table>        
+        </table>
       </div>
-      <h2 className="font-bold"><span className="text-red-700">*</span>&nbsp;Total amount spent this month: <span className="text-red-600">{total}</span></h2>
+      <h2 className="font-bold">
+        <span className="text-red-700">*</span>&nbsp;Total amount spent this
+        month: <span className="text-red-600">&#8377; {total}</span>
+      </h2>
     </div>
   );
 };
